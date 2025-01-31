@@ -7,6 +7,7 @@ describe("Tests utilisant authorize.js, gmail.js, et decodeBase64.js", () => {
   
     it("Test de récupération d'e-mails", () => {
       cy.task("fetchEmailsTask").then((emails) => {
+        expect(emails).to.not.equal(null);
         cy.log(emails); // Affiche les e-mails récupérés
       });
     });

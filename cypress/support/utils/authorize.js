@@ -59,6 +59,7 @@ async function authorize() {
             console.log(`Token sauvegardé dans ${TOKEN_PATH}`);
           } catch (writeErr) {
             console.error(`Erreur lors de l'enregistrement du token : ${writeErr.message}`);
+            return null
           }
 
           resolve(oAuth2Client);

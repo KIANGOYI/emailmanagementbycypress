@@ -16,7 +16,7 @@ async function getEmails() {
 
     // Requête pour récupérer les e-mails correspondant à des critères
     // "subject:OTP after:2025/01/15" 
-    const query = "from:notifications@replit.com after:2025/01/15";
+    const query = "from:noreply@github.com after:2025/01/30";
     const res = await gmail.users.messages.list({
       userId: "me", // "me" correspond à l'utilisateur authentifié
       q: query, // Filtre les e-mails
@@ -26,7 +26,7 @@ async function getEmails() {
     // Vérification s'il y a des messages dans la réponse
     if (!res.data.messages || res.data.messages.length === 0) {
       console.log("Aucun e-mail trouvé correspondant à la requête.");
-      return;
+      return null;
     }
 
     // Récupération des détails du premier message
@@ -43,7 +43,7 @@ async function getEmails() {
       !message.data.payload.body.data
     ) {
       console.error("Le contenu de l'e-mail est vide ou inaccessible.");
-      return;
+      return null;
     }
 
     // Décodage du contenu de l'e-mail encodé en base64
@@ -59,6 +59,7 @@ async function getEmails() {
       error.message
     );
     console.error("Détails de l'erreur :", error.stack);
+    return null;
   }
 }
 
